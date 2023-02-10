@@ -1,7 +1,9 @@
 # How to build and run the API
 
 **Ensure that you have python3 correctly installed and configured in your Operating System**
+
 **Ensure that you have PostgreSQL correctly installed and configured in your Operating System**
+
 **Ensure that you have Postman installed in your Operating System**
 
 ## Steps to build the application
