@@ -8,24 +8,23 @@
 
 ## Steps to build the application
 
- 1. Clone the Repository into your local computer
+1.  Clone the Repository into your local computer
 
- 2. Navigate to the root directory of the project using your Terminal
+2.  Navigate to the root directory of the project using your Terminal
 
- 3. Create a virual environment using the command ```python3 -m venv venv```
+3.  Create a virual environment using the command `python3 -m venv venv`
 
- 4. Activate the Virtual environment using the commands below:
+4.  Activate the Virtual environment using the commands below:
 
-     - On Linux Operating system use the command ```source ./venv/bin/activate```
+    - On Linux Operating system use the command `source ./venv/bin/activate`
 
-     - On Windows Operating System use the command ```venv\Scripts\activate.bat```
+    - On Windows Operating System use the command `venv\Scripts\activate.bat`
 
     You will notice that **venv** appears before the beginnning of your Terminal. This indicates that the Virual environment is activated.
 
- 5. Install the dependencies for the project using the command  ```pip install -r requirements.txt```
+5.  Install the dependencies for the project using the command `pip install -r requirements.txt`
 
- 6. Run the app using the command ```python3 manage.py runserver```
-
+6.  Run the app using the command `python3 manage.py runserver`
 
 ## API Structure
 
@@ -33,6 +32,6 @@ The API has 3 main modules (directories):
 
 1. src - Contains the API configurations
 
-2. accounts - Module (app) responsible for handling authentication functions and Accounts creations 
+2. authentication - Module (app) responsible for handling authentication functions and User creation & login functionality
 
 3. transfers - Module (app) responsible for handling all the financial transactions
