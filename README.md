@@ -19,12 +19,12 @@
     The .env file should have the following attributes as shown in the image
     ![debug3](https://user-images.githubusercontent.com/35394098/218056462-53673c9d-d978-4b9d-83ce-4d826cd786ce.png)
 
-    `DB_NAME= Name of your database`
+    `DB_NAME= Name of your PostgreSQL database`
 
     `DB_USER= database user`
 
     `DB_PASSWORD= database user password`
-    
+
     `DB_HOST= database host`
 
 4.  Create a virual environment using the command `python3 -m venv venv`
