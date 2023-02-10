@@ -17,8 +17,12 @@
 3.  Create a .env file at the root directory of the project
 
     The .env file should have the following attributes as shown in the image
-    ![env](https://user-images.githubusercontent.com/35394098/218055366-034aab19-990c-451b-8e6f-9c988c255718.png)
-    
+    ![debug3](https://user-images.githubusercontent.com/35394098/218056462-53673c9d-d978-4b9d-83ce-4d826cd786ce.png)
+
+    `DB_NAME= Name of your database`
+    `DB_USER= database user`
+    `DB_PASSWORD= database user password`
+    `DB_HOST= database host`
 
 4.  Create a virual environment using the command `python3 -m venv venv`
 
@@ -36,7 +40,7 @@
 
 ### In Production
 
-Change the DEBUG attribute to False in the .env file and follow the installation guidelines provided by the production platform
+Change the `DEBUG` attribute to `False` and edit the `DB_HOST` in the .env file and follow the installation guidelines provided by the production platform
 
 ## API Structure
 
