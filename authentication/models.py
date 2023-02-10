@@ -4,6 +4,36 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+class UserManager(BaseUserManager):
+    '''This class allows us to add extra Manager methods to the User creation class and validation attributes'''
+
+    def create_user(self, full_name, phone_number, password=None):
+        '''validate whether user attributes are not empty before creating a user'''
+        if not full_name:
+            return ValueError('Full name required')
+        if not phone_number:
+            return ValueError('Phone number required')
+        user = self.model(
+            full_name=full_name,
+            phone_number=phone_number
+        )
+        user.set_password(password)
+        user.save(using=self.db)
+        return user
+
+    def create_superuser(self, full_name, phone_number, password):
+        '''custom API admin creation method'''
+        user = self.create_user(
+            full_name=full_name,
+            password=password
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
 class User(AbstractBaseUser):
     '''This class is responsible for creating the Users table in the database.
 
