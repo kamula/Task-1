@@ -32,6 +32,6 @@ The API has 3 main modules (directories):
 
 1. src - Contains the API configurations
 
-2. authentication - Module (app) responsible for handling authentication functions and User creation & login functionality
+2. authentication - Module (app) responsible for handling authentication functions, User creation & login functionalities
 
 3. transfers - Module (app) responsible for handling all the financial transactions
