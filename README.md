@@ -25,3 +25,14 @@
  5. Install the dependencies for the project using the command  ```pip install -r requirements.txt```
 
  6. Run the app using the command ```python3 manage.py runserver```
+
+
+## API Structure
+
+The API has 3 main modules (directories):
+
+1. src - Contains the API configurations
+
+2. accounts - Module (app) responsible for handling authentication functions and Accounts creations 
+
+3. transfers - Module (app) responsible for handling all the financial transactions
