@@ -39,11 +39,15 @@
 
 6.  Install the dependencies for the project using the command `pip install -r requirements.txt`
 
-7.  Run the app using the command `python3 manage.py runserver`
+7.  Run the the command `python3 manage.py makemigrations` in order to generate SQL commands
+
+8.  Run the the command `python3 manage.py migrate` in order to execute those SQL commands in the database
+
+9.  Run the app using the command `python3 manage.py runserver`
 
 ### In Production
 
-Change the `DEBUG` attribute to `False` and edit the `DB_HOST` in the .env file and follow the installation guidelines provided by the production platform
+Change the `DEBUG` attribute to `False` and change the `DB_HOST` to point to the location of your database in the .env file and follow the installation guidelines provided by the production platform
 
 ## API Structure
 
