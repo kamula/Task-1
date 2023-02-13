@@ -1,4 +1,4 @@
-from .serializers import AccountCreationSerializer,GetAccountCreationSerializer
+from .serializers import AccountCreationSerializer, GetAccountCreationSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -42,7 +42,7 @@ def create_account_view(request):
                 resp['message'] = 'Account Successfully created'
                 resp['account'] = account_serializer.data
                 return Response(resp, status=status.HTTP_201_CREATED)
-            else:               
+            else:
                 resp['status'] = 'fail'
                 resp['message'] = 'Account Creation Failed'
                 return Response(resp, status=status.HTTP_400_BAD_REQUEST)
@@ -52,7 +52,7 @@ def create_account_view(request):
 @api_view(['GET'])  # define the HTTP method of accessing the view
 # The user has to be authenticated before creating an Account (before accessing the API endpoint)
 @permission_classes([IsAuthenticated])
-def get_account_details(request,id):
+def get_account_details(request, id):
     print(id)
     resp = {}
     # account = get_account_from_account_id(id)
@@ -60,8 +60,8 @@ def get_account_details(request,id):
     if account:
         account_serializer = GetAccountCreationSerializer(account)
         account_data = account_serializer.data
-        account_data['user'] = User.objects.get(id= account.user.id).full_name
-        resp['status'] = 'success'        
+        account_data['user'] = User.objects.get(id=account.user.id).full_name
+        resp['status'] = 'success'
         resp['account'] = account_data
         return Response(resp, status=status.HTTP_200_OK)
     else:
