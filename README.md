@@ -64,7 +64,4 @@ The API has 3 main modules (directories):
 
 
 In order to access the API endpoints, users must register and login in order to obtain an auth Token (JWT).
-The API schema can be accessed via this url [][def]
-
-
-[def]: http://localhost:8000/schema
+The API schema can be accessed via this url [](http://localhost:8000/schema)
