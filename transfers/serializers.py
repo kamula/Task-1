@@ -10,4 +10,4 @@ class AccountCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['user', 'starting_balance', 'date_created']
-        read_only_fields = ['starting_balance', 'date_created']
+        read_only_fields = ['date_created']
