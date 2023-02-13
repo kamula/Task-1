@@ -25,6 +25,7 @@ class UserManager(BaseUserManager):
         '''custom API admin creation method'''
         user = self.create_user(
             full_name=full_name,
+            phone_number=phone_number,
             password=password
         )
         user.is_admin = True
@@ -57,6 +58,8 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'phone_number'  # login field
     # field required to create an a User account
     REQUIRED_FIELDS = ['full_name']
+
+    objects = UserManager()
 
     def __str__(self) -> str:
         '''returns a human-readable, string representation of the User Class'''

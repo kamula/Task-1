@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('accounts', views.create_account_view, name='create_account_view'),
+    path('accounts/<uuid:id>', views.get_account_details, name='get_account_details'),
 ]
