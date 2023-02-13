@@ -6,6 +6,8 @@ from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg import openapi
+from . models import Account
+from . utils import get_account_from_account_id
 from rest_framework.decorators import api_view, permission_classes
 
 
@@ -33,11 +35,33 @@ def create_account_view(request):
             data['starting_balance'] = starting_balance
             serializer = AccountCreationSerializer(data=data)
             if serializer.is_valid():
-                serializer.save()
+                account = serializer.save()
+                account_serializer = AccountCreationSerializer(account)
                 resp['status'] = 'success'
                 resp['message'] = 'Account Successfully created'
+                resp['account'] = account_serializer.data
                 return Response(resp, status=status.HTTP_201_CREATED)
             else:               
                 resp['status'] = 'fail'
                 resp['message'] = 'Account Creation Failed'
                 return Response(resp, status=status.HTTP_400_BAD_REQUEST)
+
+
+@swagger_auto_schema(methods=['get'])
+@api_view(['GET'])  # define the HTTP method of accessing the view
+# The user has to be authenticated before creating an Account (before accessing the API endpoint)
+@permission_classes([IsAuthenticated])
+def get_account_details(request,id):
+    print(id)
+    resp = {}
+    # account = get_account_from_account_id(id)
+    account = Account.objects.get(id=id)
+    if account:
+        account_serializer = AccountCreationSerializer(account)
+        resp['status'] = 'success'        
+        resp['account'] = account_serializer.data
+        return Response(resp, status=status.HTTP_200_OK)
+    else:
+        resp['status'] = 'fail'
+        resp['message'] = 'account not found'
+        return Response(resp, status=status.HTTP_404_NOT_FOUND)
