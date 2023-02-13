@@ -69,3 +69,8 @@ The API schema can be accessed via this url [http://localhost:8000/schema](http:
 
 ![user registration](https://user-images.githubusercontent.com/35394098/218393025-f8239ff0-4141-4f61-bfe7-4afe3d68a046.png)
 
+1. For user Login, access the andpoint via a POST request and pass the following attributes in the request body (phone_number,password) as shown below.
+
+![userloginview](https://user-images.githubusercontent.com/35394098/218395556-d44dc9ac-230d-4db6-b1de-0106f2cf0ccd.png)
+
+
