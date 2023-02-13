@@ -23,3 +23,10 @@ class UserAccountSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    '''Login Input Data Validation Class'''
+    class Meta:
+        model = User
+        fields = ['phone_number', 'password']
