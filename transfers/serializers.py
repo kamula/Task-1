@@ -4,7 +4,10 @@ from rest_framework import serializers
 from . models import Account
 
 
-class AccountSerializer(serializers.ModelSerializer):
+
+class AccountCreationSerializer(serializers.ModelSerializer):
+    '''Class for Serializing & Deserializing  Account object'''
     class Meta:
         model = Account
         fields = ['user', 'starting_balance', 'date_created']
+        read_only_fields = ['starting_balance', 'date_created']
