@@ -43,6 +43,7 @@ urlpatterns = [
 
     # define the authentication urls at the root URL mapper of the project
     path('api/v1/users/', include('authentication.urls')),
+    path('api/v1/', include('transfers.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
