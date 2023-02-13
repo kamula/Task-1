@@ -93,5 +93,18 @@ If starting balance is less than 0: An error message will be presented on the re
 
 
 
+## Successfull Transaction
+
+Initial balance = 800
+
+Transfer Amount = 200
+
+Update Sender's starting Balance by subtracting 200 from the starting balance
+
+Update Receiver's starting Balance by adding 200 to their starting balance
+
+Save the Transaction in the Transfer (s) database Table
 
 
+
+**Relevent error messages will be dispalyed on  the Response body incase the transfer amount is less than 0, transfer amount is greater than available balance or the receiver's account does not exist**
