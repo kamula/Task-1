@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from . serializers import UserAccountSerializer, UserLoginSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from .utils import get_tokens_for_user, get_account_from_phone_number
 
 
 @swagger_auto_schema(methods=['post'], request_body=UserAccountSerializer)
@@ -16,8 +17,10 @@ def user_registration_view(request):
     if request.method == 'POST':
         # Get the data obtained from the request.POST HTTP method
         serializer = UserAccountSerializer(data=request.data)
-        # check id the data passed via the POST request is valid
+        # check if the data passed via the POST request is valid
+        # If the serializer (validator is valid): save the data and return a success message else return an error message
         if serializer.is_valid():
+            serializer.save()
             resp['message'] = 'success'
             return Response(resp, status=status.HTTP_201_CREATED)
         else:
@@ -29,12 +32,20 @@ def user_registration_view(request):
 @api_view(['POST'])
 def login_view(request):
     '''User Login function'''
+    # if the user login credentials are valid and the user details exist in the database, authernticate the user and return an access and refresh tokens else return an error message
+    # The access token will be used to allow the user to access the API endpoints
     resp = {}
     if request.method == 'POST':
-        serializer = UserLoginSerializer(data=request.data)
-        if serializer.is_valid():
-            resp['message'] = 'success'
+        phone_number = request.data.get('phone_number')
+        password = request.data.get('password')
+        user_account = get_account_from_phone_number(phone_number)
+        if user_account:
+            authenticate(user_account, password=password)
+            token = get_tokens_for_user(user_account)
+            resp['message'] = 'successfully logged in'
+            resp['token'] = token
             return Response(resp, status=status.HTTP_200_OK)
         else:
-            resp['message'] = 'please provide login credentials'
+            print(user_account)
+            resp['message'] = 'invalid login credentials'
             return Response(resp, status=status.HTTP_400_BAD_REQUEST)
