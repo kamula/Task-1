@@ -22,3 +22,22 @@ class Account(models.Model):
     def __str__(self) -> str:
         '''returns a human-readable, string representation of the Account's Class: Account Owner full name'''
         return f'{self.user.full_name}'
+
+
+class Transfer(models.Model):
+    '''Class Responsible for storing all Transactions'''
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # Account sending money Reference key
+    sender_account = models.ForeignKey(
+        Account, on_delete=models.CASCADE, related_name='sender')
+    # Account receiving money Reference key
+    receiving_account = models.ForeignKey(
+        Account, on_delete=models.CASCADE, related_name='receiver')
+    # amount transfered from sender to receiver
+    amount = models.IntegerField(default=0)
+    date_created = models.DateTimeField(default=timezone.now)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        '''returns a human-readable, string representation of the Account that send the money: Account Owner full name'''
+        return f'{self.sender.full_name}'
