@@ -1,4 +1,4 @@
-from .serializers import AccountCreationSerializer, GetAccountCreationSerializer
+from .serializers import AccountCreationSerializer, GetAccountCreationSerializer, CreateTransferSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -53,7 +53,7 @@ def create_account_view(request):
 # The user has to be authenticated before creating an Account (before accessing the API endpoint)
 @permission_classes([IsAuthenticated])
 def get_account_details(request, id):
-    print(id)
+  # Get Account details view
     resp = {}
     # account = get_account_from_account_id(id)
     account = Account.objects.get(id=id)
@@ -68,3 +68,69 @@ def get_account_details(request, id):
         resp['status'] = 'fail'
         resp['message'] = 'account not found'
         return Response(resp, status=status.HTTP_404_NOT_FOUND)
+
+
+@swagger_auto_schema(methods=['post'], request_body=CreateTransferSerializer)
+@api_view(['POST'])  # define the HTTP method of accessing the view
+# The user has to be authenticated before creating an Account (before accessing the API endpoint)
+@permission_classes([IsAuthenticated])
+def create_transfer(request):
+    '''This view initiates the transaction. It will use the Account of the logged in user.
+    The view can retrieve account details by using the logged in user access Token
+    '''
+    resp = {}
+    if request.method == 'POST':
+        amount = request.data.get('amount')
+        # Receivers Account (user Phone Number)
+        phone_number = request.data.get('phone_number')
+        if int(amount) < 0:
+            resp['status'] = 'fail'
+            resp['message'] = "amount cannot be less than zero"
+            return Response(resp, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            # Get the logged in user details from the access Token and also fetch the user account
+            user = request.user
+            sender_account = Account.objects.get(user=user.id)
+            # Check if amount to be send is grater tha available balance
+            if int(amount) > sender_account.starting_balance:
+                resp['status'] = 'fail'
+                resp['message'] = 'Transfer amount is greater than the available balance'
+                return Response(resp, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                '''if amount is not < 0 and amount is not greater than available balance:
+                    1. Get receiver's account details
+                    2. Save the receivers & senders details in the Transfers Table
+                    3. Subtract senders Available balance and update Sender's Account
+                    4. Update Receivers starting balance
+                '''
+                transfer_data = {}
+                receiver_registered_account = User.objects.get(
+                    phone_number=phone_number)
+                sender_transfer_account = Account.objects.get(
+                    user=receiver_registered_account.id)
+                receiver_transfer_account = Account.objects.get(
+                    user=request.user.id)
+                transfer_data['sender_account'] = sender_transfer_account.id
+                transfer_data['receiving_account'] = receiver_transfer_account.id
+                transfer_data['amount'] = amount
+
+                serializer = CreateTransferSerializer(data=transfer_data)
+                if serializer.is_valid():
+                    resp['status'] = 'success'
+                    resp['message'] = f'Successfully Tramsfered {amount} to account {phone_number}'
+                    # save the Transaction
+                    serializer.save()
+                    # Update Sender balance by subtracting the Transfered Amount
+                    sender_transfer_account.starting_balance = sender_account.starting_balance - int(
+                        amount)
+                    sender_transfer_account.save()
+
+                    # Update Receiver Amount by adding The Transfer amount
+                    receiver_transfer_account.starting_balance = sender_account.starting_balance + int(
+                        amount)
+                    sender_transfer_account.save()
+                    return Response(resp, status=status.HTTP_200_OK)
+                else:
+                    resp['status'] = 'fail'
+                    resp['message'] = f'Trasfered {amount} to account {phone_number} is not successfull'
+                    return Response(resp, status=status.HTTP_400_BAD_REQUEST)
