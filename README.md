@@ -59,11 +59,13 @@ The API has 3 main modules (directories):
 
 3. transfers - Module (app) responsible for handling all the financial transactions
 
-
 ## API Description
-
 
 In order to access the API endpoints, users must register and login in order to obtain an auth Token (JWT).
 
-
 The API schema can be accessed via this url [http://localhost:8000/schema](http://localhost:8000/schema)
+
+1. For user registration, access the andpoint via a POST request and pass the following attributes in the request body (full_name,phone_number,password) as shown below.
+
+![user registration](https://user-images.githubusercontent.com/35394098/218393025-f8239ff0-4141-4f61-bfe7-4afe3d68a046.png)
+
