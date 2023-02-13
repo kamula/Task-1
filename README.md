@@ -83,7 +83,12 @@ After that pass the staring balance in the request body as shown below:
 
 If an account has already been created: An error message will occur at the response body as shown below"
 
-![Add Event](https://user-images.githubusercontent.com/35394098/218418275-e687b23b-9e9e-4a7e-b353-75a278bfe9f0.png)
+![account creation fail](https://user-images.githubusercontent.com/35394098/218418887-256bde8e-f936-4a19-aa89-690846380740.png)
+
+If account has a negative balance: An error message will be presented on the response body
+
+![negative bal](https://user-images.githubusercontent.com/35394098/218419085-1832b9b6-197d-4e98-9bc7-1dd4464d2f14.png)
+
 
 
 
