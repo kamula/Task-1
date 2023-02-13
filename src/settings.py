@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-bd$hacwars!j*lr7@^04!k7emcrhhp1s+&_b%b%ofr&*^!10!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'authentication.apps.AuthenticationConfig',
     'transfers.apps.TransfersConfig',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -55,7 +56,9 @@ AUTH_USER_MODEL = 'authentication.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -148,7 +151,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Django Rest Framework Simple JWT Configuration
 SIMPLE_JWT = {
