@@ -85,7 +85,7 @@ If an account has already been created: An error message will occur at the respo
 
 ![account creation fail](https://user-images.githubusercontent.com/35394098/218418887-256bde8e-f936-4a19-aa89-690846380740.png)
 
-If account has a negative balance: An error message will be presented on the response body
+If starting balance is less than 0: An error message will be presented on the response body
 
 ![negative bal](https://user-images.githubusercontent.com/35394098/218419085-1832b9b6-197d-4e98-9bc7-1dd4464d2f14.png)
 
