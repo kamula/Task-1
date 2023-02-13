@@ -14,7 +14,9 @@ from rest_framework.decorators import api_view, permission_classes
 # The user has to be authenticated before creating an Account (before accessing the API endpoint)
 @permission_classes([IsAuthenticated])
 def create_account_view(request):
-    '''Account creation endpoint. Pass the access token on the request headers'''
+    '''Account creation endpoint. Pass the access token on the request headers
+        One user = One Account
+    '''
     resp = {}
     if request.method == 'POST':
         # Get user from the access Token and starting_balance from request Body

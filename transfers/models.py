@@ -12,8 +12,9 @@ class Account(models.Model):
     4. Date created (Time when the account was created. This field is not editable)
     5. Date Updated (Time when the account was updated. This field is editable)
     '''
+    # The models allows the user to only create one account
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     starting_balance = models.IntegerField()
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)

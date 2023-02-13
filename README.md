@@ -81,6 +81,11 @@ After that pass the staring balance in the request body as shown below:
 
 ![starting_balance](https://user-images.githubusercontent.com/35394098/218416667-1761f9f2-102f-437b-8931-3cec742f4f41.png)
 
+If an account has already been created: An error message will occur at the response body as shown below"
+
+![Add Event](https://user-images.githubusercontent.com/35394098/218418275-e687b23b-9e9e-4a7e-b353-75a278bfe9f0.png)
+
+
 
 
 
