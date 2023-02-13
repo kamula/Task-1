@@ -58,3 +58,13 @@ The API has 3 main modules (directories):
 2. authentication - Module (app) responsible for handling authentication functions, User creation & login functionalities
 
 3. transfers - Module (app) responsible for handling all the financial transactions
+
+
+## API Description
+
+
+In order to access the API endpoints, users must register and login in order to obtain an auth Token (JWT).
+The API schema can be accessed via this url [][def]
+
+
+[def]: http://localhost:8000/schema
